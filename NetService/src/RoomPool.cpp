@@ -47,20 +47,14 @@ void RoomPool::destroy()
 
 Room* RoomPool::acquire()
 {
-    //如果最后索引位置等于或者大于池的尺寸，则扩充
     if (_offset >= _poolSize)
     {
-        //扩充后的尺寸
         uint32 increasedSize = _poolSize + _incrPoolSize;
-
-        //重新分配池尺寸
         _roomObjPool.resize(increasedSize);
 
-        //分配内存
         for (uint32 i = _poolSize; i < increasedSize; ++i)
         {
             Room* room = new Room();
-            room->cleanup();
             _roomObjPool.push_back(room);
         }
 
@@ -73,6 +67,8 @@ Room* RoomPool::acquire()
         room->setPoolObjId(_offset);
         room->setRoomID(_offset);
         room->setIsValid(true);
+
+        _offset++;
     }
 }
 
@@ -89,8 +85,18 @@ void  RoomPool::release(uint32 poolObjId)
     }
 
     _offset--;
-    Room* room = _roomObjPool[poolObjId];
-    
-    _roomObjPool[_offset] = room;
+    Room* releaseRoomPtr = _roomObjPool[poolObjId];
+    if (poolObjId == _offset)
+    {
+        releaseRoomPtr->cleanup();
+    }
+    else
+    {
+        // exchange pointer
+        _roomObjPool[poolObjId] = _roomObjPool[_offset];
+        _roomObjPool[_offset] = releaseRoomPtr;
+        _roomObjPool[poolObjId]->setPoolObjId(poolObjId);
 
+        releaseRoomPtr->cleanup();
+    }
 }

@@ -4,6 +4,7 @@
 
 Room::Room()
 {
+    cleanup();
 }
 
 

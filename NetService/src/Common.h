@@ -54,6 +54,8 @@ typedef unsigned int       uint32;
 typedef unsigned long long uint64;
 #endif
 
+#define INVALID_ID       (-1)
+
 //Lines
 #if defined(_WIN32)
 #define NEWLINE "\r\n"
