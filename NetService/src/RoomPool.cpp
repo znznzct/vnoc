@@ -69,7 +69,11 @@ Room* RoomPool::acquire()
         room->setIsValid(true);
 
         _offset++;
+
+        return room;
     }
+
+    return NULL;
 }
 
 void  RoomPool::release(uint32 poolObjId)
