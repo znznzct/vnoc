@@ -6,8 +6,7 @@
 // Description : Hello World in C++, Ansi-style
 //============================================================================
 
-
-
+#include "Common.h"
 #include <iostream>
 #include "NetService.h"
 #include "Config.hpp"
@@ -17,15 +16,16 @@
 using namespace std;
 
 
-int main()
+int main(int argc, char* argv[])
 {
     Config::getInstance()->Initialize("vnoc.conf");
     cout<<"port:"<<Config::getInstance()->getValue("port")<<endl;
     sUserStorage us;
     CUserManage::GetInstance()->initial(&us);
+	uint16 port = Config::getInstance()->getValue("port");
 
     NetService net;
-    net.start(Config::getInstance()->getValue("port"));
+    net.start(port);
 
     return 0;
 }

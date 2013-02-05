@@ -1,5 +1,6 @@
-#include "RoomPool.h"
+
 #include "Room.h"
+#include "RoomPool.h"
 
 RoomPool::RoomPool()
 {
@@ -13,7 +14,7 @@ RoomPool::~RoomPool()
     destroy();
 }
 
-bool RoomPool::initPool(uint32 size = DEFAULT_ROOM_POOL_SIZE, uint32 incrSize = DEFAULT_ROOM_POOL_INCREASE_SIZE)
+bool RoomPool::initPool(uint32 size/* = DEFAULT_ROOM_POOL_SIZE*/, uint32 incrSize/* = DEFAULT_ROOM_POOL_INCREASE_SIZE*/)
 {
     if (size == 0 || incrSize == 0)
     {

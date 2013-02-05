@@ -16,9 +16,6 @@
     <ClInclude Include="src\RoomPool.h">
       <Filter>modules\room</Filter>
     </ClInclude>
-    <ClInclude Include="src\RoomPool.cpp">
-      <Filter>modules\room</Filter>
-    </ClInclude>
     <ClInclude Include="src\RvcMessageHandler.hpp">
       <Filter>handlers</Filter>
     </ClInclude>
@@ -165,6 +162,9 @@
     </ClCompile>
     <ClCompile Include="src\Config.cpp">
       <Filter>config</Filter>
+    </ClCompile>
+    <ClCompile Include="src\RoomPool.cpp">
+      <Filter>modules\room</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
