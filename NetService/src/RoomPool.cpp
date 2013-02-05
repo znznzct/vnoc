@@ -56,7 +56,7 @@ Room* RoomPool::acquire()
         for (uint32 i = _poolSize; i < increasedSize; ++i)
         {
             Room* room = new Room();
-            _roomObjPool.push_back(room);
+            _roomObjPool[i] = room;
         }
 
         _poolSize = increasedSize;
