@@ -262,7 +262,7 @@ public:
         CBufferMessage buff;
         CMessage2Pack packer;
         const int someRoomNo = 12345678;
-        recMessage.SetRoomID(someRoomNo);
+        recMessage.SetRoomID(someRoomNo);              //this room number does not exist.
         packer.PackMessage(&recMessage, buff);
         conn_->setRecv((char*)buff.GetBuffer(), buff.GetSize());
         char *sendBuf = (char*)conn_->getSendBuf();
@@ -275,7 +275,7 @@ public:
         uint32 retTag;
         msg.GetRetTag( retTag );
         CPPUNIT_ASSERT(msg.MsgId() == MSG_AnswerEnterClassroom_Id);
-        CPPUNIT_ASSERT(retTag == 1);
+        CPPUNIT_ASSERT(retTag == 1);//room number error, this request was refused.
         
         Room roomForTest;
         roomForTest.setRoomID( someRoomNo );
@@ -289,7 +289,7 @@ public:
         parser.Parser(&msg, Rbuff);
         msg.GetRetTag( retTag );
         CPPUNIT_ASSERT(msg.MsgId() == MSG_AnswerEnterClassroom_Id);
-        CPPUNIT_ASSERT(retTag == 0);
+        CPPUNIT_ASSERT(retTag == 0);//room number is legal now, this request was accepted.
     }
 
 };
