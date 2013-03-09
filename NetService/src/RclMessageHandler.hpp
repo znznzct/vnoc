@@ -16,7 +16,6 @@ public:
     }
     virtual int operator()(const CMessage *msg, MessageContext *ctx)
     {
-        std::cout << "handle RclMessageHandler" << endl;
         MSG_AnswerClassList aclMessage;
         MSG_RequestClassList rclMessage(*msg);
 
