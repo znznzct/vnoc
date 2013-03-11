@@ -151,9 +151,6 @@
     <ClInclude Include="net\Net.h">
       <Filter>Net</Filter>
     </ClInclude>
-    <ClInclude Include="net\Socket\AsyncSocket.h">
-      <Filter>Net\Socket</Filter>
-    </ClInclude>
     <ClInclude Include="net\Socket\AsyncSocketEx.h">
       <Filter>Net\Socket</Filter>
     </ClInclude>
@@ -490,9 +487,6 @@
       <Filter>Net\Socket</Filter>
     </ClCompile>
     <ClCompile Include="net\Socket\VNOCSocket.cpp">
-      <Filter>Net\Socket</Filter>
-    </ClCompile>
-    <ClCompile Include="net\Socket\AsyncSocket.cpp">
       <Filter>Net\Socket</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ThirdLibs\TinyXML\tinystr.cpp">
