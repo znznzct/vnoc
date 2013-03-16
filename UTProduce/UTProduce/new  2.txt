@@ -1,0 +1,101 @@
+1. 找到 CPPUNIT_TEST( MSG_@MsgName@_Test );
+2. 把 CPPUNIT_TEST( MSG_@MsgName@_Test ); 前的一部分放到字符串里
+3.  遍历 msg 把CPPUNIT_TEST( MSG_@MsgName@_Test ); 给一条条弄好
+4. 把 CPPUNIT_TEST( MSG_@MsgName@_Test );后的	CPPUNIT_TEST_SUITE_END();
+public: void setUp(){}void tearDown(){} 放进去. 前面的也放进去.
+			// 开始遍历填充void MSG_@MsgName@_Test()
+5. 寻找void MSG_@MsgName@_Test() 替换掉@MsgName@ , 并把前面一部分放在字符串strTop里
+	(1) 找到 MSG_@MsgName@ TM@MsgName@; 并且替换掉  把前面一部分留在字符串中
+	(2) 找到
+	
+	
+	
+	 void MSG_@MsgName@_Test()
+	{
+		CBufferMessage buf;
+		MSG_@MsgName@ TM@MsgName@;
+		// 如果遇到vector 则自动生成  并且自动Push_back, 并且用TM@MsgName@ 来Set 并自动clear()
+		TM@MsgName@.Set@item_name@(@item_type_value@); // 根据mtype, type自动嵌入数据
+		
+		g_m2pack.PackMessage(TM@MsgName@, buf);
+		CMessage parserMsg(CMessage2Parser::GetMsgType(buf));
+		CPPUNIT_ASSERT(CMessage2Parser::GetMsgType(buf) == MSG_@MsgName@_Id);
+		g_m2parser.Parser(&parserMsg, buf);	
+		
+		MSG_@MsgName@ TP@MsgName@(parserMsg);
+		@item_mtype@ @item_name@;
+		TP@MsgName@.Get@item_name@(@item_type_value@);
+		CPPUNIT_ASSERT(@item_name@ == @item_mtype_value@); // 如果遇到vector 一一测试
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+#ifdef CPPTEST
+#include <cppunit/TestFixture.h>
+#include <cppunit/extensions/HelperMacros.h>
+#include <Windows.h>
+#include <string.h>
+#include <shlwapi.h>
+#include <atlstr.h>
+#include <string>
+#include <vector>
+#include "../../NMessage/MessageUnion.h"
+#include "../../NMessage/Message2Pack.h"
+#include "../../NMessage/Message2Parser.h"
+#include "../../NMessage/ParserMessageXML.h"
+#include "../../NMessage/BufferMessage.h"
+
+using namespace VNOC::Message;
+using namespace VNOC::Message::Define;
+
+///> Generate by UTProduse. DO NOT EDIT!
+
+CMessage2Pack g_m2pack;
+CMessage2Parser g_m2parser;
+
+class MSG_Message_Test : public CppUnit::TestFixture
+{
+	CPPUNIT_TEST_SUITE( MSG_Message_Test );
+	CPPUNIT_TEST( MSG_@MsgName@_Test );
+	CPPUNIT_TEST_SUITE_END();
+	
+public:
+    void setUp()
+    {
+    }
+    void tearDown()
+    {
+    }
+	
+public:
+	void MSG_@MsgName@_Test()
+	{
+		CBufferMessage buf;
+		MSG_@MsgName@ TM@MsgName@;
+		TM@MsgName@.Set@item_name@(@item_type_value@);
+		
+		g_m2pack.PackMessage(TM@MsgName@, buf);
+		CMessage parserMsg(CMessage2Parser::GetMsgType(buf));
+		CPPUNIT_ASSERT(CMessage2Parser::GetMsgType(buf) == MSG_@MsgName@_Id);
+		g_m2parser.Parser(&parserMsg, buf);	
+		
+		MSG_@MsgName@ TP@MsgName@(parserMsg);
+		@item_mtype@ @item_name@;
+		TP@MsgName@.Get@item_name@(@item_name@);
+		CPPUNIT_ASSERT(@item_name@ == @item_type_value@);
+	}
+
+
+}// namespace Message
+}// namespace VNOC
+
+#endif
