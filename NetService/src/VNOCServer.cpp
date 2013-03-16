@@ -14,7 +14,6 @@
 #include <string>
 #include "SQLUserStorage.h"
 #include "UserManage.hpp"
-#include "../../NMessage/ParserMessageXML.h"
 using namespace std;
 using namespace VNOC::Message;
 
