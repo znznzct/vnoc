@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="utility">
+      <UniqueIdentifier>{dc7da2a4-438b-4e5c-b5d7-891b211a8049}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="utility\File">
+      <UniqueIdentifier>{8013782e-fb99-40b0-9996-01903968ca1c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UTProduce">
+      <UniqueIdentifier>{1f5dcc55-5d59-4075-b6e5-7f014de1e589}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="XMLContainer">
+      <UniqueIdentifier>{e284f9e6-8899-4116-813d-19c70e07e616}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="utility\TinyXML">
+      <UniqueIdentifier>{cf104f30-35a9-4346-b51e-556add5e282e}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="UTProduce\main.cpp">
+      <Filter>UTProduce</Filter>
+    </ClCompile>
+    <ClCompile Include="UTProduce\XMLParser.cpp">
+      <Filter>UTProduce</Filter>
+    </ClCompile>
+    <ClCompile Include="UTProduce\Utility\File\FileBase.cpp">
+      <Filter>utility\File</Filter>
+    </ClCompile>
+    <ClCompile Include="UTProduce\XMLContainer\XMLItem.cpp">
+      <Filter>XMLContainer</Filter>
+    </ClCompile>
+    <ClCompile Include="UTProduce\XMLContainer\XMLMsg.cpp">
+      <Filter>XMLContainer</Filter>
+    </ClCompile>
+    <ClCompile Include="UTProduce\Utility\TinyXML\tinystr.cpp">
+      <Filter>utility\TinyXML</Filter>
+    </ClCompile>
+    <ClCompile Include="UTProduce\Utility\TinyXML\tinyxml.cpp">
+      <Filter>utility\TinyXML</Filter>
+    </ClCompile>
+    <ClCompile Include="UTProduce\Utility\TinyXML\tinyxmlerror.cpp">
+      <Filter>utility\TinyXML</Filter>
+    </ClCompile>
+    <ClCompile Include="UTProduce\Utility\TinyXML\tinyxmlparser.cpp">
+      <Filter>utility\TinyXML</Filter>
+    </ClCompile>
+    <ClCompile Include="UTProduce\XMLContainer\XMLMsgGatherer.cpp">
+      <Filter>XMLContainer</Filter>
+    </ClCompile>
+    <ClCompile Include="UTProduce\UTProducer.cpp">
+      <Filter>UTProduce</Filter>
+    </ClCompile>
+    <ClCompile Include="UTProduce\Producer.cpp">
+      <Filter>UTProduce</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="UTProduce\XMLParser.h">
+      <Filter>UTProduce</Filter>
+    </ClInclude>
+    <ClInclude Include="UTProduce\Utility\File\FileBase.h">
+      <Filter>utility\File</Filter>
+    </ClInclude>
+    <ClInclude Include="UTProduce\Utility\File\IFile.h">
+      <Filter>utility\File</Filter>
+    </ClInclude>
+    <ClInclude Include="UTProduce\MsgDef.h">
+      <Filter>UTProduce</Filter>
+    </ClInclude>
+    <ClInclude Include="UTProduce\StdAfx.h">
+      <Filter>UTProduce</Filter>
+    </ClInclude>
+    <ClInclude Include="UTProduce\XMLContainer\XMLItem.h">
+      <Filter>XMLContainer</Filter>
+    </ClInclude>
+    <ClInclude Include="UTProduce\XMLContainer\XMLMsg.h">
+      <Filter>XMLContainer</Filter>
+    </ClInclude>
+    <ClInclude Include="UTProduce\Utility\TinyXML\tinystr.h">
+      <Filter>utility\TinyXML</Filter>
+    </ClInclude>
+    <ClInclude Include="UTProduce\Utility\TinyXML\tinyxml.h">
+      <Filter>utility\TinyXML</Filter>
+    </ClInclude>
+    <ClInclude Include="UTProduce\XMLContainer\XMLMsgGatherer.h">
+      <Filter>XMLContainer</Filter>
+    </ClInclude>
+    <ClInclude Include="UTProduce\UTProducer.h">
+      <Filter>UTProduce</Filter>
+    </ClInclude>
+    <ClInclude Include="UTProduce\XMLContainer\IXMLObject.h">
+      <Filter>XMLContainer</Filter>
+    </ClInclude>
+    <ClInclude Include="UTProduce\Producer.h">
+      <Filter>UTProduce</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
