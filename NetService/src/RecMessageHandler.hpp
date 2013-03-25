@@ -2,6 +2,7 @@
 #include "VnocProtocol.hpp"
 #include "RoomManager.h"
 #include "VNOCUser.h"
+#include "UserManage.hpp"
 
 class RecMessageHandler : public IMessageHandler
 {
@@ -29,13 +30,10 @@ public:
         recMessage.GetVerificationCode( verification );
         */
         Room *room= RoomManager::instance().getRoom( roomID );
+        VNOCUser &vUser = CUserManage::GetInstance()->getOnlineUser( ctx->userName );
         if (room != NULL)
         {
-            VNOCUser vuser;
-            vuser.setNickName( ctx->userName );
-            static uint32 guid = 0;
-            vuser.setUniqueID( guid++ );
-            bool tag = room->addUser( &vuser );
+            bool tag = room->addUser( &vUser );
             aecMessage.SetRetTag( tag ? 0 : 1 );
         }
         else
