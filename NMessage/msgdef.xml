@@ -96,4 +96,12 @@
 	<msg name="MSG_AnswerEnterClassroom" id="6110">
 		<item mtype="data" name="RetTag" type="uint32" />
 	</msg>
+	
+	<msg name="MSG_SendChatMsgToServer" id="7101">
+		<item mtype="data" name="ChatMsg" type="string" />
+	</msg>
+	
+	<msg name="MSG_ServerSendChatMsgToClient" id="7102">
+		<item mtype="data" name="ChatMsg" type="string" />
+	</msg>
 </vnoc>
