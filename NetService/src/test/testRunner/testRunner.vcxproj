@@ -203,6 +203,7 @@
     <ClInclude Include="..\..\..\..\ThirdLibs\TinyXML\tinystr.h" />
     <ClInclude Include="..\..\..\..\ThirdLibs\TinyXML\tinyxml.h" />
     <ClInclude Include="..\..\RoomManager.h" />
+    <ClInclude Include="..\..\UserManage.hpp" />
     <ClInclude Include="..\..\VNOCUser.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -155,5 +155,8 @@
     <ClInclude Include="..\..\VNOCUser.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\UserManage.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
