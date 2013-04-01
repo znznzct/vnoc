@@ -1,19 +1,27 @@
+//============================================================================
+// Name        : DBCached.h
+// Author      : AngryPowman
+// Version     :
+// Copyright   : VNOC
+// Description : 
+//============================================================================
+
 #ifndef DBCACHED_H_
 #define DBCACHED_H_
 
 #include "Common.h"
-#include <sqlite3/sqlite3.h>
+#include <boost/noncopyable.hpp>
 
-class DBCached
+struct sqlite3;
+class DBCached : public boost::noncopyable
 {
-public:
+protected:
     DBCached();
-    DBCached(string filename);
     virtual ~DBCached();
 
 protected:
     bool init(string filename);
-    bool destroy();
+    void destroy();
 
 private:
     sqlite3* _db;

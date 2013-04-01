@@ -99,7 +99,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>../ThirdLibs/VisualLeakDetector/lib/win32/vld.lib;$(ProjectDir)/lib/libmysql.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>../ThirdLibs/VisualLeakDetector/lib/win32/vld.lib;$(ProjectDir)/lib/libmysql.lib;$(ProjectDir)/lib/sqlite3.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PreBuildEvent>
       <Command>
