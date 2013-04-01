@@ -16,9 +16,6 @@
     <ClInclude Include="src\RoomPool.h">
       <Filter>modules\room</Filter>
     </ClInclude>
-    <ClInclude Include="src\RoomPool.cpp">
-      <Filter>modules\room</Filter>
-    </ClInclude>
     <ClInclude Include="src\RvcMessageHandler.hpp">
       <Filter>handlers</Filter>
     </ClInclude>
@@ -129,6 +126,12 @@
     </ClInclude>
     <ClInclude Include="src\RecMessageHandler.hpp">
       <Filter>handlers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\VNOCUserManager.h">
+      <Filter>modules\obj</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DBCached.h">
+      <Filter>database\DBCached</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -241,6 +244,13 @@
     <ClCompile Include="..\ThirdLibs\TinyXML\tinyxmlparser.cpp">
       <Filter>Tinyxml</Filter>
     </ClCompile>
+    <ClCompile Include="src\RoomPool.cpp" />
+    <ClCompile Include="src\VNOCUserManager.cpp">
+      <Filter>modules\obj</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DBCached.cpp">
+      <Filter>database\DBCached</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="handlers">
@@ -278,6 +288,9 @@
     </Filter>
     <Filter Include="Tinyxml">
       <UniqueIdentifier>{612edc88-d65f-4513-a139-0d3150d54afe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="database\DBCached">
+      <UniqueIdentifier>{ade9e650-5fdb-4413-8d06-300b063975c3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

@@ -189,6 +189,7 @@
     <ClInclude Include="src\AsioTcpServer.hpp" />
     <ClInclude Include="src\Common.h" />
     <ClInclude Include="src\Config.hpp" />
+    <ClInclude Include="src\DBCached.h" />
     <ClInclude Include="src\FileUserStorage.h" />
     <ClInclude Include="src\GlobalDefinition.h" />
     <ClInclude Include="src\mysql\MysqlWrapper.h" />
@@ -209,6 +210,7 @@
     <ClInclude Include="src\VnocMessageSocketHandler.hpp" />
     <ClInclude Include="src\VnocProtocol.hpp" />
     <ClInclude Include="src\VNOCUser.h" />
+    <ClInclude Include="src\VNOCUserManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\NMessage\BufferMessage.cpp" />
@@ -237,6 +239,7 @@
     <ClCompile Include="..\ThirdLibs\TinyXML\tinyxmlparser.cpp" />
     <ClCompile Include="src\AsioTcpServer.cpp" />
     <ClCompile Include="src\Config.cpp" />
+    <ClCompile Include="src\DBCached.cpp" />
     <ClCompile Include="src\FileUserStorage.cpp" />
     <ClCompile Include="src\mysql\MysqlWrapper.cpp" />
     <ClCompile Include="src\NetService.cpp" />
@@ -249,6 +252,7 @@
     <ClCompile Include="src\VnocProtocol.cpp" />
     <ClCompile Include="src\VNOCServer.cpp" />
     <ClCompile Include="src\VNOCUser.cpp" />
+    <ClCompile Include="src\VNOCUserManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="src\VnocMessageSocketHandler.inl" />
