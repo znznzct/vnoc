@@ -14,7 +14,7 @@
 #include "SQLUserStorage.h"
 #include "UserManage.hpp"
 using namespace std;
-
+using namespace VNOC::Message;
 
 int main(int argc, char* argv[])
 {
@@ -31,5 +31,5 @@ int main(int argc, char* argv[])
 }
 
 #ifdef WIN32
-#include "../../ThirdLibs/VisualLeakDetector/include/vld.h"
+//#include "../../ThirdLibs/VisualLeakDetector/include/vld.h"
 #endif

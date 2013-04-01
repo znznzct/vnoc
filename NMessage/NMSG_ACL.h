@@ -20,20 +20,25 @@ public:
         InitializeMessage("NMSG_ACL");
     }
 
+    NMSG_ACL(const CMessage& Msg)
+    {
+        CMessage::Copy(Msg, "NMSG_ACL");
+    }
+
     virtual ~NMSG_ACL(){}
 
-    MsgStatus SetRoomList(const std::vector<uint32>& Value)
+    MsgStatus SetRoomList(const std::vector<Define::uint32>& Value)
     {
         ArrayData* ValueArr = new ArrayData;
-        ValueArr->Push<uint32>(Value);
+        ValueArr->Push<Define::uint32>(Value);
         return WriteArr("RoomList", ValueArr);
     }
 
-    MsgStatus GetRoomList(std::vector<uint32>& Value)
+    MsgStatus GetRoomList(std::vector<Define::uint32>& Value)
     {
         ArrayData* pReadValueArr = NULL;
         ReadArr("RoomList", pReadValueArr);
-        pReadValueArr->GetArr_vec<uint32>(Value);
+        pReadValueArr->GetArr_vec<Define::uint32>(Value);
         return MsgStatus_Ok;
     }
 };

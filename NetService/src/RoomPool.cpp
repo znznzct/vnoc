@@ -1,4 +1,3 @@
-
 #include "Room.h"
 #include "RoomPool.h"
 
@@ -51,12 +50,11 @@ Room* RoomPool::acquire()
     if (_offset >= _poolSize)
     {
         uint32 increasedSize = _poolSize + _incrPoolSize;
-        _roomObjPool.resize(increasedSize);
-
+        _roomObjPool.reserve(increasedSize);
         for (uint32 i = _poolSize; i < increasedSize; ++i)
         {
             Room* room = new Room();
-            _roomObjPool[i] = room;
+            _roomObjPool.push_back(room);
         }
 
         _poolSize = increasedSize;

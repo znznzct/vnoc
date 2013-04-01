@@ -1,9 +1,13 @@
+# Directories to ignore
+bin
+[Bb]uild
+Debug
+Release
+/NetService/src/test/testRunner
+/Client/CppTest
 
-/NetService/Debug
-/NetService/bin
+# Files to ignore
 *.sdf
-/netservice/Debug
-/netservice/Release
 *.obj
 *.tlog
 *.user
@@ -15,8 +19,10 @@
 *.ipch
 *.suo
 *.pdb
+*.manifest
 *.opensdf
 *.cache
+*.lib
 *.o
 *.aps
 *.unsuccessfulbuild
@@ -26,25 +32,15 @@ cpptestresults.xml
 !libmysql.lib
 !mysqlclient.lib
 
-/NetService/src/test/testRunner/x64
-/NetService/src/test/testRunner/Debug
-/NetService/src/test/testRunner/Release
 /NetService/libmysql.dll
 /NetService/NetService.zip
 /NetService/server.exe
-/NetService/Debug
-/NetService/x64
-/NetService/Release
 /NetService/.project
 /NetService/.cproject
-/NetService/EchoTestServer/x64
-/NetService/EchoTestServer/Debug
-/NetService/EchoTestServer/Release
-/NetService/src/test/testRunner/Debug
-/NetService/src/test/testRunner/Release
-/NetService/src/test/testRunner/x64
-/Client/Debug
-/Client/Release
-/Client/Console
-/Client/CppTest
-/Artifacts
+
+# CMake
+CMakeCache.txt
+CMakeFiles
+Makefile
+cmake_install.cmake
+install_manifest.txt

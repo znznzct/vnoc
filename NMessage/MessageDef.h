@@ -22,15 +22,46 @@
 
 #include <string>
 #include <vector>
+#include "MessageUnionDef.h"
 
 namespace VNOC
 {
 namespace Message
 {
 
+typedef enum _MsgDataType
+{
+    MsgDataType_Null,
+    MsgDataType_String,
+    MsgDataType_Uint8,
+    MsgDataType_Uint16,
+    MsgDataType_Uint32,
+}MsgDataType;
+
+typedef enum _MsgDataMType
+{
+    MsgDataMType_Null,
+    MsgDataMType_Data,
+    MsgDataMType_List,
+}MsgDataMType;
+
+namespace Define
+{
+
+typedef std::string         MsgDataName;
+typedef MsgDataMType        MsgMType;
+typedef MsgDataType         MsgType;
+typedef unsigned char       uint8;
+typedef unsigned short      uint16;
+typedef unsigned int        uint32;
+typedef char                int8;
+typedef short               int16;
+typedef int                 int32;
+
+}
 #define MSG_BEGIN    0x56 // 'V' 标记消息的开始
 #define MSG_END      0x43 // 'C' 标记消息的结束
-#define MSG_VER      0 // 版本号
+#define MSG_VER      1 // 版本号
 
 #define MSG_HEAD_LEN 10
 #define MSG_TAIL_LEN 1
@@ -48,6 +79,9 @@ namespace Message
 #define MSG_CLASS_PARAM                4
 #define MSG_CLASS_PARAM_COUNT          4
 
+#define MSG_PACKSIZE_INDEX  MSG_CLASS_VER + MSG_CLASS_BEGIN
+#define MSG_COMMAND_INDEX MSG_PACKSIZE_INDEX + MSG_CLASS_LEN
+
 #ifndef DISALLOW_COPY_AND_ASSIGN
 #define DISALLOW_COPY_AND_ASSIGN(TypeName) \
     TypeName(const TypeName&);             \
@@ -58,54 +92,6 @@ namespace Message
 #define DISALLOW_ASSIGN(TypeName) \
     void operator=(const TypeName&);
 #endif
-
-typedef std::string         MsgDataName;
-typedef unsigned char       uint8;
-typedef unsigned short      uint16;
-typedef unsigned int        uint32;
-typedef char                int8;
-typedef short               int16;
-typedef int                 int32;
-
-typedef enum _VMsg
-{
-    //服务器节点
-    MSG_RequestQueryServer              = 1100, //获取一个服务器节点（请求）
-    MSG_AnswerQueryServer               = 1101, //获取一个服务器节点（应答）
-
-    //账号处理
-    MSG_RequestRegister                 = 2100, //注册帐号（请求）
-    MSG_AnswerRegister                  = 2101, //注册帐号（应答）
-
-    //验证码
-    MSG_RequestVerificationCode         = 3101, //获取验证码（请求）
-    MSG_AnswerVerificationCode          = 3102, //获取验证码（应答）
-
-    //登陆
-    MSG_RequestLogin                    = 4101, //登录（请求）
-    MSG_AnswerLogin                     = 4102, //登录（应答）
-
-    //个人
-    MSG_RequestProfileSync              = 5101, //个人信息同步（通知）
-    MSG_AnswerProfileSync               = 5102, //个人信息同步（通知确认）
-
-    //班级
-    MSG_RequestClassSync                = 6101, //班级信息同步（通知）
-    MSG_AnswerClassSync                 = 6102, //班级信息同步（通知确认）
-    MSG_RequestClassSyncResult          = 6103, //班级同步结果（通知）
-    MSG_AnswerClassSyncResult           = 6104, //班级同步结果（通知确认）
-    MSG_RequestClassList                = 6105, //获取班级列表（请求）
-    MSG_AnswerClassList                 = 6106, //获取班级列表（应答）
-    MSG_RequestClassInfo                = 6107, //获取班级信息（请求）
-    MSG_AnswerClassInfo                 = 6108, //获取班级信息（应答）
-}VMsg;
-
-typedef enum _MsgDataMType
-{
-    MsgDataMType_Null,
-    MsgDataMType_Data,
-    MsgDataMType_List,
-}MsgDataMType;
 
 #define MsgDataMType_XML_Data     "data"
 #define MsgDataMType_XML_List     "list"
@@ -122,20 +108,15 @@ typedef enum _MsgDataMType
 #define MsgDataType_XML_Uint8     "uint8"
 #define MsgDataType_XML_String    "string"
 
-typedef enum _MsgDataType
-{
-    MsgDataType_Null,
-    MsgDataType_String,
-    MsgDataType_Uint8,
-    MsgDataType_Uint16,
-    MsgDataType_Uint32,
-}MsgDataType;
+#define MsgPack_Unk 0
 
 typedef enum _MsgStatus
 {
    MsgStatus_Ok,
    MsgStatus_Err,
    MsgStatus_Unk,
+   MsgStatus_FormatFailure,
+   MsgStatus_TypeErr,
 }MsgStatus;
 
 }// namespace Message

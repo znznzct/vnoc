@@ -3,7 +3,7 @@
 
 #include "IBaseMessage.h"
 #include <map>
-#include "XMLObject.h"
+#include "MessageDef.h"
 
 namespace VNOC
 {
@@ -13,44 +13,61 @@ namespace Message
 class CMessage : public IMessage
 {
 public:
-    CMessage(const std::string& strName);
     CMessage(int nId);
     virtual ~CMessage();
 
     virtual MsgStatus Read(
-        IN const MsgDataName& name,
-        OUT MsgDataValue*& value);
+        IN const Define::MsgDataName& name,
+        OUT MsgDataValue*& value) const;
 
     virtual MsgStatus ReadArr(
-        IN  const MsgDataName& name,
-        OUT ArrayData*& value);
+        IN  const Define::MsgDataName& name,
+        OUT ArrayData*& value) const;
 
-    virtual int MsgId();
+    virtual int MsgId() const;
 
     virtual MsgStatus Write(
-        IN const MsgDataName& name,
+        IN const Define::MsgDataName& name,
         IN MsgDataValue* pValue);
 
     virtual MsgStatus WriteArr(
-        IN const MsgDataName& name,
+        IN const Define::MsgDataName& name,
         IN ArrayData* pValue);
 
-    virtual bool IsValid();
+    virtual bool IsValid() const;
+
+    CMessage& Copy(const CMessage& lhs, int MessageId = 0);
+
+    CMessage& CopyPort(const CMessage& lhs);
+
+    std::map<Define::MsgDataName,
+        std::pair<Define::MsgMType,
+        Define::MsgType> >::const_iterator PortBegin() const;
+
+    std::map<Define::MsgDataName,
+        std::pair<Define::MsgMType,
+        Define::MsgType> >::const_iterator PortEnd() const;
 
 protected:
     CMessage();
 
-    void InitializeMessage(const std::string& strName);
-
     void InitializeMessage(int nId);
+
+    bool IsRegister(const Define::MsgDataName& name) const;
+
+    virtual void RegisterPort(
+        const Define::MsgDataName& strName,
+        const Define::MsgMType& strMType,
+        const Define::MsgType& strType);
 
 private:
     void _InitDataMap();
     void _ReleaseMap();
 
-    std::map<MsgDataName, MsgDataValue*> m_mapMsgData;
-    std::map<MsgDataName, ArrayData*>    m_mapMsgDataArr;
-    XMLObject* m_xmlObject;
+    std::map<Define::MsgDataName, std::pair<Define::MsgMType, Define::MsgType> > m_mapPort;
+    std::map<Define::MsgDataName, MsgDataValue*> m_mapMsgData;
+    std::map<Define::MsgDataName, ArrayData*>    m_mapMsgDataArr;
+    Define::uint32 m_MsgId;
 };
 
 }// namespace Message

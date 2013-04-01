@@ -1,13 +1,17 @@
 #include "BufferMessage.h"
 #include <stdlib.h>
+#include <cstring>
 
 namespace VNOC
 {
 namespace Message
 {
 
+using namespace Define;
+
 CBufferMessage::CBufferMessage()
     : m_attachtag(false)
+    , m_Size(0)
     , m_pBuffer(NULL)
 {
 }

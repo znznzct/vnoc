@@ -149,4 +149,3 @@ void CGlobalCenter::_UnInitializeFrameWork()
 		m_pFrameWork->UnInitialize();
 	}
 }
-

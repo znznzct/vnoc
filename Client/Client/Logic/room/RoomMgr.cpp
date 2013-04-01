@@ -25,7 +25,8 @@ ResultCode CRoomMgr::UnInitialize()
 
 ResultCode CRoomMgr::Run()
 {
-	netHelper.AddFilter(MSG_ACL_TYPE, this);
+	netHelper.AddFilter(MSG_AnswerClassList_Id, this);
+    netHelper.AddFilter(MSG_AnswerEnterClassroom_Id, this);
     netHelper.StartListen();
     return Result_Success;
 }
@@ -56,13 +57,29 @@ ResultCode CRoomMgr::Show( BOOL bShow/*=TRUE*/ )
 	return Result_Success;
 }
 
-ResultCode CRoomMgr::GetRoomList()
+ResultCode CRoomMgr::EnterRoom(RoomID id, std::string password, std::string verificationCode)
 {
-    INetCenter *pNetCenter = NULL;
+    INetCenter *pNetCenter = nullptr;
     Global->GetINetCenter(&pNetCenter);
     if(pNetCenter)
     {
-        MSG_RCL netMsg;
+        MSG_RequestEnterClassroom netMsg;
+        netMsg.SetRoomID(id);
+        netMsg.SetRoomPassword(password);
+        netMsg.SetVerificationCode(verificationCode);
+        pNetCenter->SendServer(netMsg);
+        return Result_Success;
+    }
+    return Result_Fail;
+}
+
+ResultCode CRoomMgr::GetRoomList()
+{
+    INetCenter *pNetCenter = nullptr;
+    Global->GetINetCenter(&pNetCenter);
+    if(pNetCenter)
+    {
+        MSG_RequestClassList netMsg;
         pNetCenter->SendServer(netMsg);
         return Result_Success;
     }
@@ -74,16 +91,30 @@ VOID CRoomMgr::OnGetRoomList( XMessage *pMsg )
     GetRoomList();
 }
 
-ResultCode CRoomMgr::OnNetMessage( const CMessage& msg )
+VOID CRoomMgr::OnEnterRoom(XMessage_EnterRoom *pMsg)
 {
-    switch(msg.GetMessageType())
+    EnterRoom(pMsg->roomId, pMsg->password, pMsg->verificationCode);
+}
+
+ResultCode CRoomMgr::OnNetMessage( const CMessage &msg )
+{
+    switch(msg.MsgId())
     {
-    case MSG_ACL_TYPE:
-        const MSG_ACL* msgReal = dynamic_cast<const MSG_ACL*>(&msg);
-        if(msgReal)
+    case MSG_AnswerClassList_Id:
         {
+            MSG_AnswerClassList msgReal(msg);
             XMessage_GetRoomList_Result result;
-            msgReal->GetRoomList(result.roomID);
+            msgReal.GetRoomIdList(result.roomIdList);
+            msgReal.GetRoomNameList(result.roomNameList);
+            msgReal.GetRoomStateList(result.roomStateList);
+            SendXMessage(&result);
+            break;
+        }
+    case MSG_AnswerEnterClassroom_Id:
+        {
+            MSG_AnswerEnterClassroom msgReal(msg);
+            XMessage_EnterRoom_Result result;
+            msgReal.GetRetTag(result.retTag);
             SendXMessage(&result);
         }
     }

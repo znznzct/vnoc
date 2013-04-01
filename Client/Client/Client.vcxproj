@@ -80,6 +80,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PreBuildEvent>
       <Command>
@@ -102,7 +103,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>cppunitd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>ws2_32.lib;cppunitd.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PreBuildEvent>
       <Command>
@@ -129,6 +130,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PreBuildEvent>
       <Command>
@@ -167,13 +169,30 @@
     <ClInclude Include="..\..\NMessage\IReadMessage.h" />
     <ClInclude Include="..\..\NMessage\IWriteMessage.h" />
     <ClInclude Include="..\..\NMessage\Message2Pack.h" />
+    <ClInclude Include="..\..\NMessage\Message2Parser.h" />
     <ClInclude Include="..\..\NMessage\MessageDef.h" />
+    <ClInclude Include="..\..\NMessage\MessageUnion.h" />
+    <ClInclude Include="..\..\NMessage\MessageUnionDef.h" />
     <ClInclude Include="..\..\NMessage\MsgDataValue\ArrayData.h" />
     <ClInclude Include="..\..\NMessage\MsgDataValue\MsgDataValue.h" />
+    <ClInclude Include="..\..\NMessage\MsgDataValue\NumData.hpp" />
+    <ClInclude Include="..\..\NMessage\MsgDataValue\NumData_t.hpp" />
     <ClInclude Include="..\..\NMessage\MsgDataValue\StringData.h" />
-    <ClInclude Include="..\..\NMessage\Pack2Message.h" />
+    <ClInclude Include="..\..\NMessage\MSG_AnswerClassInfo.h" />
+    <ClInclude Include="..\..\NMessage\MSG_AnswerClassList.h" />
+    <ClInclude Include="..\..\NMessage\MSG_AnswerEnterClassroom.h" />
+    <ClInclude Include="..\..\NMessage\MSG_AnswerLogin.h" />
+    <ClInclude Include="..\..\NMessage\MSG_AnswerProfileSync.h" />
+    <ClInclude Include="..\..\NMessage\MSG_AnswerRegister.h" />
+    <ClInclude Include="..\..\NMessage\MSG_AnswerVerificationCode.h" />
+    <ClInclude Include="..\..\NMessage\MSG_RequestClassInfo.h" />
+    <ClInclude Include="..\..\NMessage\MSG_RequestClassList.h" />
+    <ClInclude Include="..\..\NMessage\MSG_RequestEnterClassroom.h" />
+    <ClInclude Include="..\..\NMessage\MSG_RequestLogin.h" />
+    <ClInclude Include="..\..\NMessage\MSG_RequestProfileSync.h" />
+    <ClInclude Include="..\..\NMessage\MSG_RequestRegister.h" />
+    <ClInclude Include="..\..\NMessage\MSG_RequestVerificationCode.h" />
     <ClInclude Include="..\..\NMessage\ParserMessageXML.h" />
-    <ClInclude Include="..\..\NMessage\ParserMessage.h" />
     <ClInclude Include="..\..\NMessage\XMLObject.h" />
     <ClInclude Include="..\..\ThirdLibs\TinyXML\tinystr.h" />
     <ClInclude Include="..\..\ThirdLibs\TinyXML\tinyxml.h" />
@@ -230,7 +249,6 @@
     <ClInclude Include="Logic\UserSession\StrMatch.hpp" />
     <ClInclude Include="net\INet.h" />
     <ClInclude Include="net\Net.h" />
-    <ClInclude Include="net\Socket\AsyncSocket.h" />
     <ClInclude Include="net\Socket\AsyncSocketEx.h" />
     <ClInclude Include="net\Socket\ISocket.h" />
     <ClInclude Include="net\Socket\SockWnd.h" />
@@ -255,10 +273,10 @@
     <ClCompile Include="..\..\NMessage\BufferMessage.cpp" />
     <ClCompile Include="..\..\NMessage\CMessage.cpp" />
     <ClCompile Include="..\..\NMessage\Message2Pack.cpp" />
+    <ClCompile Include="..\..\NMessage\Message2Parser.cpp" />
     <ClCompile Include="..\..\NMessage\MsgDataValue\ArrayData.cpp" />
     <ClCompile Include="..\..\NMessage\MsgDataValue\MsgDataValue.cpp" />
     <ClCompile Include="..\..\NMessage\MsgDataValue\StringData.cpp" />
-    <ClCompile Include="..\..\NMessage\Pack2Message.cpp" />
     <ClCompile Include="..\..\NMessage\ParserMessageXML.cpp" />
     <ClCompile Include="..\..\NMessage\XMLObject.cpp" />
     <ClCompile Include="..\..\ThirdLibs\TinyXML\tinystr.cpp" />
@@ -266,7 +284,7 @@
     <ClCompile Include="..\..\ThirdLibs\TinyXML\tinyxmlerror.cpp" />
     <ClCompile Include="..\..\ThirdLibs\TinyXML\tinyxmlparser.cpp" />
     <ClCompile Include="config\Config.cpp" />
-    <ClCompile Include="CppUnitTest\NMessageTest.cpp" />
+    <ClCompile Include="CppUnitTest\MSG_Message_Test.cpp" />
     <ClCompile Include="CppUnitTest\testPackMessage.cpp" />
     <ClCompile Include="CppUnitTest\testRunner.cpp" />
     <ClCompile Include="CppUnitTest\Vnocp1MessageParserTest.cpp" />
@@ -285,7 +303,6 @@
     <ClCompile Include="Logic\UserSession\LoginImpl.cpp" />
     <ClCompile Include="Logic\UserSession\usersessionTest.cpp" />
     <ClCompile Include="net\Net.cpp" />
-    <ClCompile Include="net\Socket\AsyncSocket.cpp" />
     <ClCompile Include="net\Socket\AsyncSocketEx.cpp" />
     <ClCompile Include="net\Socket\SockWnd.cpp" />
     <ClCompile Include="net\Socket\VNOCSocket.cpp" />
@@ -306,6 +323,9 @@
     <Xml Include="Resource\msgdef.xml" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
-  <ImportGroup Label="ExtensionTargets">
-  </ImportGroup>
+  <ImportGroup Label="ExtensionTargets" />
+  <Target Name="Test">
+    <Message Text="Configuration is " />
+    <Message Text="MSBuildToolsPath is " />
+  </Target>
 </Project>
