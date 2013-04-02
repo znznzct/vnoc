@@ -244,12 +244,14 @@
     <ClCompile Include="..\ThirdLibs\TinyXML\tinyxmlparser.cpp">
       <Filter>Tinyxml</Filter>
     </ClCompile>
-    <ClCompile Include="src\RoomPool.cpp" />
     <ClCompile Include="src\VNOCUserManager.cpp">
       <Filter>modules\obj</Filter>
     </ClCompile>
     <ClCompile Include="src\DBCached.cpp">
       <Filter>database\DBCached</Filter>
+    </ClCompile>
+    <ClCompile Include="src\RoomPool.cpp">
+      <Filter>modules\room</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
