@@ -15,8 +15,9 @@
 #include "MSG_AnswerClassInfo.h "
 #include "MSG_RequestEnterClassroom.h "
 #include "MSG_AnswerEnterClassroom.h "
-#include "MSG_SendChatMsgToServer.h "
-#include "MSG_ServerSendChatMsgToClient.h "
+#include "MSG_RequestSendChat.h "
+#include "MSG_AnswerSendChat.h "
+#include "MSG_DispatchChat.h "
 #include "MessageUnionDef.h "
 
 #endif

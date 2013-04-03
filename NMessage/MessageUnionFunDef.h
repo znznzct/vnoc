@@ -70,12 +70,16 @@ void RegistrePort(CMessage* pMsg, int nId)
         pMsgConver = new MSG_AnswerEnterClassroom;
         pMsg->CopyPort(*pMsgConver);
         break;
-    case MSG_SendChatMsgToServer_Id:
-        pMsgConver = new MSG_SendChatMsgToServer;
+    case MSG_RequestSendChat_Id:
+        pMsgConver = new MSG_RequestSendChat;
         pMsg->CopyPort(*pMsgConver);
         break;
-    case MSG_ServerSendChatMsgToClient_Id:
-        pMsgConver = new MSG_ServerSendChatMsgToClient;
+    case MSG_AnswerSendChat_Id:
+        pMsgConver = new MSG_AnswerSendChat;
+        pMsg->CopyPort(*pMsgConver);
+        break;
+    case MSG_DispatchChat_Id:
+        pMsgConver = new MSG_DispatchChat;
         pMsg->CopyPort(*pMsgConver);
         break;
     }
