@@ -37,6 +37,9 @@ class MSG_Message_Test : public CppUnit::TestFixture
     CPPUNIT_TEST( MSG_RequestVerificationCode_Test );
 	CPPUNIT_TEST( MSG_RequestVerificationCode_Test );
     CPPUNIT_TEST( MSG_RequestEnterClassroom_Test );
+	CPPUNIT_TEST( MSG_RequestSendChat_Test );
+	CPPUNIT_TEST( MSG_AnswerSendChat_Test );
+	CPPUNIT_TEST( MSG_DispatchChat_Test );
     CPPUNIT_TEST_SUITE_END();
 public:
     void setUp()
@@ -554,8 +557,74 @@ public:
 		TParserAec.GetRetTag(nRetTag);
 		CPPUNIT_ASSERT(nRetTag == 123405);
 	}
+
+	void MSG_RequestSendChat_Test()
+	{
+		CBufferMessage buf;
+		MSG_RequestSendChat TMRsc;
+
+		std::string strNickname = "路人甲";
+		std::string strChatMsg = "发个消息";
+		uint8 nChatMsgLen = strChatMsg.length();
+		TMRsc.SetNickname(strNickname);
+		TMRsc.SetChatMsg(strChatMsg);
+		TMRsc.SetChatMsgLen(nChatMsgLen);
+
+		g_m2pack.PackMessage(&TMRsc, buf);
+		CMessage parserMsg(CMessage2Parser::GetMsgType(buf));
+		CPPUNIT_ASSERT(CMessage2Parser::GetMsgType(buf) == MSG_RequestSendChat_Id);
+		g_m2parser.Parser(&parserMsg, buf);
+		MSG_RequestSendChat TParserRsc(parserMsg);
+
+		TParserRsc.GetNickname(strNickname);
+		CPPUNIT_ASSERT(strNickname == "路人甲");
+		TParserRsc.GetChatMsg(strChatMsg);
+		CPPUNIT_ASSERT(strChatMsg == "发个消息");
+		TParserRsc.GetChatMsgLen(nChatMsgLen);
+		CPPUNIT_ASSERT(nChatMsgLen == strChatMsg.length());
+	}
+
+	void MSG_AnswerSendChat_Test()
+	{
+		CBufferMessage buf;
+		MSG_AnswerSendChat TMAsc;
+		uint8 nSendMsgRlt = 10;
+		TMAsc.SetSendMsgRlt(nSendMsgRlt);
+
+		g_m2pack.PackMessage(&TMAsc, buf);
+		CMessage parserMsg(CMessage2Parser::GetMsgType(buf));
+		CPPUNIT_ASSERT(CMessage2Parser::GetMsgType(buf) == MSG_AnswerSendChat_Id);
+		g_m2parser.Parser(&parserMsg, buf);
+		MSG_AnswerSendChat TParserAsc(parserMsg);
+
+		TParserAsc.GetSendMsgRlt(nSendMsgRlt);
+		CPPUNIT_ASSERT(nSendMsgRlt == 10);
+	}
+
+	void MSG_DispatchChat_Test()
+	{
+		CBufferMessage buf;
+		MSG_DispatchChat TMDc;
+		std::string strNickname = "路人甲";
+		std::string strChatMsg = "发个消息";
+		TMDc.SetNickname(strNickname);
+		TMDc.SetChatMsg(strChatMsg);
+
+		g_m2pack.PackMessage(&TMDc, buf);
+		CMessage parserMsg(CMessage2Parser::GetMsgType(buf));
+		CPPUNIT_ASSERT(CMessage2Parser::GetMsgType(buf) == MSG_DispatchChat_Id);
+		g_m2parser.Parser(&parserMsg, buf);
+		MSG_DispatchChat TParserDc(parserMsg);
+
+		TParserDc.GetNickname(strNickname);
+		CPPUNIT_ASSERT(strNickname == "路人甲");
+		TParserDc.GetChatMsg(strNickname);
+		CPPUNIT_ASSERT(strNickname == "发个消息");
+	}
 };
 
+
+	
 CPPUNIT_TEST_SUITE_REGISTRATION ( MSG_Message_Test );
 CPPUNIT_TEST_SUITE_NAMED_REGISTRATION(MSG_Message_Test, "testNMessage");
 
