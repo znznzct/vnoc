@@ -26,7 +26,7 @@ private:
 
 public:
     void setConnection(DBConnection* conn);
-    void setCommandText(const DBString& commandText);
+    bool setCommandText(const DBString& commandText);
 
 public:
     DBCommand& operator << (const std::string& value);
@@ -41,6 +41,7 @@ public:
     bool execute();
     bool execute(const std::string& commandText);
     int  rowsAffected() const;
+    bool isResultSet() const;
     bool fetchNext();
     bool fetchPrev();
     bool fetchFirst();
@@ -53,7 +54,8 @@ public:
 private:
     DBConnection* _conn;
     sqlite3_stmt* _stmt;
-    DBString _commandText;
+    DBString      _commandText;
+    bool          _isResultSet;
 };
 
 #endif

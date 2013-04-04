@@ -69,6 +69,11 @@ bool DBConnection::isAlive() const
     return (_state == STATE_OPENED);
 }
 
+sqlite3* DBConnection::connection()
+{
+    return _db;
+}
+
 CONNECTION_STATE DBConnection::state() const
 {
     return _state;

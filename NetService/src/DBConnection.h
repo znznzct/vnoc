@@ -22,6 +22,7 @@ public:
     bool open(const std::string& filename);
     void close();
     bool isAlive() const;
+    sqlite3* connection();
     CONNECTION_STATE state() const;
 
 private:
