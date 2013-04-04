@@ -20,8 +20,8 @@ int main(int argc, char* argv[])
 {
     Config::getInstance()->Initialize("vnoc.conf");
     cout<<"port:"<<Config::getInstance()->getValue("port")<<endl;
-    sUserStorage us;
-    CUserManage::GetInstance()->initial(&us);
+    //sUserStorage us;
+    //CUserManage::GetInstance()->initial(&us);
 	uint16 port = Config::getInstance()->getValue("port");
 
     NetService net;
