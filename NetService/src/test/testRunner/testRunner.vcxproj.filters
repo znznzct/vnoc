@@ -22,6 +22,9 @@
     <Filter Include="Tinyxml">
       <UniqueIdentifier>{2a5c846d-5123-4a5d-97e9-bc6275cb280c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="DB">
+      <UniqueIdentifier>{05d6922c-8a8b-4dcd-aebb-b307a78d90da}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\testRunner.cpp">

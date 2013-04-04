@@ -130,8 +130,14 @@
     <ClInclude Include="src\VNOCUserManager.h">
       <Filter>modules\obj</Filter>
     </ClInclude>
-    <ClInclude Include="src\DBCached.h">
-      <Filter>database\DBCached</Filter>
+    <ClInclude Include="src\DBConnection.h">
+      <Filter>database\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DBCommand.h">
+      <Filter>database\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DBDefine.h">
+      <Filter>database\Core</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -247,11 +253,14 @@
     <ClCompile Include="src\VNOCUserManager.cpp">
       <Filter>modules\obj</Filter>
     </ClCompile>
-    <ClCompile Include="src\DBCached.cpp">
-      <Filter>database\DBCached</Filter>
-    </ClCompile>
     <ClCompile Include="src\RoomPool.cpp">
       <Filter>modules\room</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DBConnection.cpp">
+      <Filter>database\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DBCommand.cpp">
+      <Filter>database\Core</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -291,8 +300,8 @@
     <Filter Include="Tinyxml">
       <UniqueIdentifier>{612edc88-d65f-4513-a139-0d3150d54afe}</UniqueIdentifier>
     </Filter>
-    <Filter Include="database\DBCached">
-      <UniqueIdentifier>{ade9e650-5fdb-4413-8d06-300b063975c3}</UniqueIdentifier>
+    <Filter Include="database\Core">
+      <UniqueIdentifier>{0b5192e2-6892-4661-b53c-79af0ecf7e7d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
