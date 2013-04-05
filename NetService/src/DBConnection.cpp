@@ -6,8 +6,13 @@
 
 DBConnection::DBConnection()
 {
-    _db = NULL;
-    _state = STATE_CLOSED;
+    cleanup();
+}
+
+DBConnection::DBConnection(const DBString& filename)
+{
+    cleanup();
+    setDBFile(filename);
 }
 
 DBConnection::~DBConnection()
@@ -15,14 +20,26 @@ DBConnection::~DBConnection()
     this->close();
 }
 
+void DBConnection::cleanup()
+{
+    _db = NULL;
+    _state = STATE_CLOSED;
+}
+
 bool DBConnection::open(const DBString& filename)
 {
-    fstream file(filename, ios::in);
+    setDBFile(filename);
+    return open();
+}
+
+bool DBConnection::open()
+{
+    fstream file(_dbFile, ios::in);
     if (!file.is_open())
     {
         EZLOGGERVLSTREAM(axter::log_often)
             << "Failed to open database, file not exists.\n" 
-            << "    Path = " << filename 
+            << "    Path = " << _dbFile 
             << endl;
 
         return false;
@@ -34,9 +51,9 @@ bool DBConnection::open(const DBString& filename)
     }
 
 #ifdef DB_UTF16
-    int result = sqlite3_open16(filename.c_str(), &_db);
+    int result = sqlite3_open16(_dbFile.c_str(), &_db);
 #else
-    int result = sqlite3_open(filename.c_str(), &_db);
+    int result = sqlite3_open(_dbFile.c_str(), &_db);
 #endif
 
     if (result != SQLITE_OK)
@@ -48,6 +65,7 @@ bool DBConnection::open(const DBString& filename)
         return false;
     }
 
+    _state = STATE_OPENED;
     return true;
 }
 
@@ -62,6 +80,11 @@ void DBConnection::close()
     }
 
     _db = NULL;
+}
+
+void DBConnection::setDBFile(const DBString& filename)
+{
+    _dbFile = filename;
 }
 
 bool DBConnection::isAlive() const

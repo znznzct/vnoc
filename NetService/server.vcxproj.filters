@@ -139,6 +139,15 @@
     <ClInclude Include="src\DBDefine.h">
       <Filter>database\Core</Filter>
     </ClInclude>
+    <ClInclude Include="src\SqliteDB.h">
+      <Filter>database\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DBRecordset.h">
+      <Filter>database\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DBField.hpp">
+      <Filter>database\Core</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\program_options\cmdline.cpp">

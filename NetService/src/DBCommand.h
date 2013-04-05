@@ -2,12 +2,10 @@
 #define DB_COMMAND_H_
 
 #include "DBDefine.h"
+#include <vector>
 #include <boost/function.hpp>
 
 class DBConnection;
-class DBRecordset;
-class DBField;
-struct Blob;
 struct sqlite3_stmt;
 
 typedef boost::function<void ()> EventCallBack;
@@ -34,26 +32,24 @@ public:
     DBCommand& operator << (int64 value);
     DBCommand& operator << (double value);
     DBCommand& operator << (Blob* blob);
-    DBField& operator [] (int32 filedIndex);
+    const DBField& operator [] (int32 filedIndex) const;
     DBField& operator [] (const std::string& filedName);
 
 public:
+    bool query();
+    bool query(const DBString& commandText);
     bool execute();
-    bool execute(const std::string& commandText);
+    bool execute(const DBString& commandText);
     int  rowsAffected() const;
     bool isResultSet() const;
-    bool fetchNext();
-    bool fetchPrev();
-    bool fetchFirst();
-    bool fetchLast();
 
 public:
-    DBConnection* connection() const;
     DBString commandText() const;
 
 private:
     DBConnection* _conn;
     sqlite3_stmt* _stmt;
+    Recordset     _recordset;
     DBString      _commandText;
     bool          _isResultSet;
 };

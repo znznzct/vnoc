@@ -193,6 +193,8 @@
     <ClInclude Include="src\DBCommand.h" />
     <ClInclude Include="src\DBConnection.h" />
     <ClInclude Include="src\DBDefine.h" />
+    <ClInclude Include="src\DBField.hpp" />
+    <ClInclude Include="src\DBRecordset.h" />
     <ClInclude Include="src\FileUserStorage.h" />
     <ClInclude Include="src\GlobalDefinition.h" />
     <ClInclude Include="src\mysql\MysqlWrapper.h" />
@@ -206,6 +208,7 @@
     <ClInclude Include="src\RvcMessageHandler.hpp" />
     <ClInclude Include="src\SocketServer.hpp" />
     <ClInclude Include=".\src\UserManage.hpp" />
+    <ClInclude Include="src\SqliteDB.h" />
     <ClInclude Include="src\SQLUserStorage.h" />
     <ClInclude Include="src\UserInfo.hpp" />
     <ClInclude Include=".\src\UserStorage.h" />
