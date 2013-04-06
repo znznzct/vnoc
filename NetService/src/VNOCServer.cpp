@@ -13,6 +13,8 @@
 #include <string>
 #include "SQLUserStorage.h"
 #include "UserManage.hpp"
+#include "DBConnection.h"
+#include "DBCommand.h"
 #include <ezlogger_headers.hpp>
 
 using namespace std;
@@ -25,6 +27,18 @@ int main(int argc, char* argv[])
     //sUserStorage us;
     //CUserManage::GetInstance()->initial(&us);
 	uint16 port = Config::getInstance()->getValue("port");
+
+    //db test
+    DBConnection connection("F:\\VNOC\\NetService\\Database\\VNOC.db");
+    connection.open();
+    if (connection.isAlive())
+    {
+        cout << "Start DB OK." << endl;
+    }
+
+    DBCommand cmd(&connection, "SELECT nick_name, gender FROM Users WHERE guid = ?;");
+    cmd << 20000;
+    cmd.query();
 
     NetService net;
     net.start(port);
