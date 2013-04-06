@@ -2,6 +2,7 @@
 #define DB_COMMAND_H_
 
 #include "DBDefine.h"
+#include "DBRecordset.hpp"
 #include <vector>
 #include <boost/function.hpp>
 
@@ -32,8 +33,6 @@ public:
     DBCommand& operator << (int64 value);
     DBCommand& operator << (double value);
     DBCommand& operator << (Blob* blob);
-    const DBField& operator [] (int32 filedIndex) const;
-    DBField& operator [] (const std::string& filedName);
 
 public:
     bool query();
@@ -49,9 +48,10 @@ public:
 private:
     DBConnection* _conn;
     sqlite3_stmt* _stmt;
-    Recordset     _recordset;
+    DBRecordset   _dbRecordset;
     DBString      _commandText;
     bool          _isResultSet;
+    int32         _rowsAffetched;
 };
 
 #endif

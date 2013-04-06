@@ -12,7 +12,7 @@ typedef std::string DBString;
 #endif
 
 class DBField;
-typedef std::vector<DBField*> Recordset;
+//typedef std::vector<DBField*> Recordset;
 
 enum DB_DATA_TYPE
 {
@@ -33,5 +33,14 @@ struct Blob
     byte* blob;
     int size;
 };
+
+typedef std::unordered_map<string, DBField*> StringKeyValue;
+typedef std::unordered_map<int, DBField*> IntKeyValue;
+
+typedef struct
+{
+    StringKeyValue StringKeySet;
+    IntKeyValue IntKeySet;
+} Record;
 
 #endif

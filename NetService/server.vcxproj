@@ -194,9 +194,10 @@
     <ClInclude Include="src\DBConnection.h" />
     <ClInclude Include="src\DBDefine.h" />
     <ClInclude Include="src\DBField.hpp" />
-    <ClInclude Include="src\DBRecordset.h" />
+    <ClInclude Include="src\DBRecordset.hpp" />
     <ClInclude Include="src\FileUserStorage.h" />
     <ClInclude Include="src\GlobalDefinition.h" />
+    <ClInclude Include="src\DKeyMap.h" />
     <ClInclude Include="src\mysql\MysqlWrapper.h" />
     <ClInclude Include="src\NetService.h" />
     <ClInclude Include="src\RclMessageHandler.hpp" />

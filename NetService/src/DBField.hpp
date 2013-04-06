@@ -4,6 +4,8 @@
 #include "DBDefine.h"
 #include <sqlite3/sqlite3.h>
 
+const int32 INVALID_FIELD_POS = -1;
+
 class DBField
 {
     friend class DBCommand;
@@ -11,53 +13,28 @@ class DBField
 public:
     int fieldPos() const
     {
-        return fieldData.pos;
+        return _fieldData.pos;
     }
 
-    DB_DATA_TYPE fieldType() const;
-    DBString fieldName() const;
-    int32 fieldSize() const;
+    const DBString& fieldName() const
+    {
+        return _fieldData.field_name;
+    }
 
 private:
-    DBField()
+    DBField(sqlite3_stmt* stmt) : _stmt(stmt)
     {
-        /*dataTypeValue.data = NULL;
-        dataTypeValue.len = 0;
-        dataTypeValue.type = DB_DATA_TYPE_NONE;
-        dataTypeValue.unsigned_flag = false;
-
-        fieldData.pos = 0;*/
     }
 
-    sqlite3_stmt* stmt;
-    
-
-#if defined(__GNUC__)
-#pragma pack(1)
-#else
-#pragma pack(push, 1)
-#endif
-    struct
+    struct FieldData
     {
-        uint32 len;
-        void* data;
-        DB_DATA_TYPE type;
-        bool unsigned_flag;
-    } dataTypeValue;
-
-    struct
-    {
+        DBString field_name;
         int32 pos;
-        DBString name;
 
-    } fieldData;
+        FieldData() : pos(INVALID_FIELD_POS) {}
+    } _fieldData;
 
-#if defined(__GNUC__)
-#pragma pack()
-#else
-#pragma pack(pop)
-#endif
-
+    sqlite3_stmt* _stmt;
 };
 
 

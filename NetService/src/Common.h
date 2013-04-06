@@ -10,6 +10,7 @@ typedef unsigned int GUID_t;
 #include <map>
 #include <algorithm>
 #include <hash_map>
+#include <unordered_map> //c++0x
 
 using namespace std;
 

@@ -1,8 +1,10 @@
 #include "DBCommand.h"
 #include "DBConnection.h"
+#include "DBDefine.h"
 #include <ezlogger_headers.hpp>
 #include <sqlite3/sqlite3.h>
 #include "DBField.hpp"
+#include "DBRecordset.hpp"
 
 DBCommand::DBCommand()
 {
@@ -29,13 +31,6 @@ void DBCommand::cleanup()
 {
     _conn = NULL;
     _stmt = NULL;
-
-
-    for (uint32 i = 0; i < _recordset.size(); ++i)
-    {
-        delete [] _recordset[i];
-    }
-    _recordset.clear();
 }
 
 void DBCommand::setConnection(DBConnection* conn)
@@ -103,39 +98,33 @@ DBField& DBCommand::operator [] (const DBString& filedName)
 
 bool DBCommand::query()
 {
-    //int result = sqlite3_step(_stmt);
-    //if (result != SQLITE_ROW && result == SQLITE_DONE)
-    //{
-    //    _isResultSet = false;
-    //    return false;
-    //}
-
-    int32 fetchedRows = rowsAffected();
-    _recordset.resize(fetchedRows);
-
-    int rowIndex = 0;
+    _dbRecordset.recordset().clear();
     while (sqlite3_step(_stmt) == SQLITE_ROW)
     {
         int32 colCount = sqlite3_column_count(_stmt);
-        _recordset[rowIndex] = new DBField[colCount]();
         
         //遍历查询出来的所有列
+        Record record;
         for (int32 i = 0; i < colCount; ++i)
         {
-            _recordset[rowIndex][i].stmt = _stmt;
-
 #ifdef DB_UTF16    
             DBString fieldName = sqlite3_column_name16(_stmt, i);  
 #else   
             DBString fieldName = sqlite3_column_name(_stmt, i);  
-#endif   
+#endif
 
-            DB_DATA_TYPE dataType = (DB_DATA_TYPE)sqlite3_column_type(_stmt, i);
-            _recordset[rowIndex][i].fieldData.name = fieldName;
-            _recordset[rowIndex][i].fieldData.pos = i;
-            _recordset[rowIndex][i].dataTypeValue.type = dataType;
+            DBField field(_stmt);
+            field._fieldData.field_name = fieldName;
+            field._fieldData.pos = i;
+
+            record.StringKeySet.insert(std::make_pair(fieldName, &field));
+            record.IntKeySet.insert(std::make_pair(i, &field));
         }
+
+        _dbRecordset.recordset().push_back(record);
     }
+
+    _rowsAffetched = rowsAffected();
 
     EZLOGGERVLSTREAM(axter::log_often) << "Query operation Done, " << rowsAffected() << " rows fetched." << endl;
     _isResultSet = true;

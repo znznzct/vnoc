@@ -36,12 +36,8 @@ int main(int argc, char* argv[])
         cout << "Start DB OK." << endl;
     }
 
-    DBCommand cmd(&connection, "DELETE FROM Users;");
-    //cmd.execute();
-
-    cmd.setCommandText("SELECT * FROM Users;");
+    DBCommand cmd(&connection, "SELECT * FROM Users;");
     cmd.query();
-
 
     NetService net;
     net.start(port);

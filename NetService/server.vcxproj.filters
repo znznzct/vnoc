@@ -142,10 +142,13 @@
     <ClInclude Include="src\SqliteDB.h">
       <Filter>database\Core</Filter>
     </ClInclude>
-    <ClInclude Include="src\DBRecordset.h">
+    <ClInclude Include="src\DBField.hpp">
       <Filter>database\Core</Filter>
     </ClInclude>
-    <ClInclude Include="src\DBField.hpp">
+    <ClInclude Include="src\DKeyMap.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DBRecordset.hpp">
       <Filter>database\Core</Filter>
     </ClInclude>
   </ItemGroup>
