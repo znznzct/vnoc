@@ -30,7 +30,7 @@ int main(int argc, char* argv[])
 	uint16 port = Config::getInstance()->getValue("port");
 
     //db test
-    DBConnection connection("F:\\VNOC\\NetService\\Database\\VNOC.db");
+    /*DBConnection connection("F:\\VNOC\\NetService\\Database\\VNOC.db");
     connection.open();
     if (connection.isAlive())
     {
@@ -47,7 +47,7 @@ int main(int argc, char* argv[])
             cout << cmd["nick_name"].fieldIndex() << ", " << cmd["nick_name"].fieldName() << endl;
             cout << cmd["gender"].fieldIndex() << ", " << cmd["gender"].fieldName() << endl;
         }
-    }
+    }*/
 
     NetService net;
     net.start(port);
