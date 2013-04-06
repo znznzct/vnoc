@@ -15,6 +15,7 @@
 #include "UserManage.hpp"
 #include "DBConnection.h"
 #include "DBCommand.h"
+#include "DBField.hpp"
 #include <ezlogger_headers.hpp>
 
 using namespace std;
@@ -36,9 +37,17 @@ int main(int argc, char* argv[])
         cout << "Start DB OK." << endl;
     }
 
-    DBCommand cmd(&connection, "SELECT nick_name, gender FROM Users WHERE guid = ?;");
-    cmd << 20000;
-    cmd.query();
+    DBCommand cmd(&connection, "SELECT guid, nick_name, gender FROM Users;");
+    bool result = cmd.query();
+    if (result == true)
+    {
+        while (cmd.fetchNext())
+        {
+            cout << cmd["guid"].fieldIndex() << ", " << cmd["guid"].fieldName() << endl;
+            cout << cmd["nick_name"].fieldIndex() << ", " << cmd["nick_name"].fieldName() << endl;
+            cout << cmd["gender"].fieldIndex() << ", " << cmd["gender"].fieldName() << endl;
+        }
+    }
 
     NetService net;
     net.start(port);
