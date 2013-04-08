@@ -86,4 +86,29 @@
 		<item mtype="list" name="RoomPeopleListId" type="uint32" />
 		<item mtype="data" name="RoomManageId" type="uint32" />
 	</msg>
+	
+	<msg name="MSG_RequestEnterClassroom" id="6109">
+		<item mtype="data" name="VerificationCode" type="string" />
+		<item mtype="data" name="RoomID" type="uint32" />
+		<item mtype="data" name="RoomPassword" type="string" />
+	</msg>
+	
+	<msg name="MSG_AnswerEnterClassroom" id="6110">
+		<item mtype="data" name="RetTag" type="uint32" />
+	</msg>
+	
+	<msg name="MSG_RequestSendChat" id="7101">
+		<item mtype="data" name="Nickname" type="string" />
+		<item mtype="data" name="ChatMsg" type="string" />
+		<item mtype="data" name="ChatMsgLen" type="uint8" />
+	</msg>
+	
+	<msg name="MSG_AnswerSendChat" id="7102">
+		<item mtype="data" name="SendMsgRlt" type="uint8" />
+	</msg>
+	
+	<msg name="MSG_DispatchChat" id="7103">
+		<item mtype="data" name="Nickname" type="string" />
+		<item mtype="data" name="ChatMsg" type="string" />
+	</msg>
 </vnoc>
