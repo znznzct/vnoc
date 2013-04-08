@@ -4,8 +4,9 @@
 #include "UserStorage.h"
 #include <string>
 #include <cstring>
-#include <set>
+#include <map>
 #include <mutex>
+#include "VNOCUser.h"
 
 #define NULLPOINT           -1
 #define LOGIN_OK            1
@@ -38,9 +39,9 @@ public:
         }
 
         strncpy(pUserInfo->strUser, szUser, 40);
-        userSetMutex.lock();
-        bool usernameInserted = insertOnlineUser(szUser);
-        userSetMutex.unlock();
+        VNOCUser vUser;
+        vUser.setNickName(std::string(szUser));
+        bool usernameInserted = insertOnlineUser(vUser);
         if(usernameInserted == false)
         {
             return HAS_LOGINED;//this user has logined, deny this login request.
@@ -74,6 +75,7 @@ public:
 
         return LOGIN_OK;
     }
+
     bool deleteOnlineUser(const char* szUser)
     {
         std::string temp = szUser;
@@ -82,12 +84,28 @@ public:
         userSetMutex.unlock();
         return deleteResult;
     }
+
+    VNOCUser& getOnlineUser(const std::string userName)
+    {
+        userSetMutex.lock();
+        VNOCUser &vUser =  onlineUsers[userName];
+        userSetMutex.unlock();
+        return vUser;
+    }
 private:
     static CUserManage _instance;
-    std::set<std::string> onlineUsers;
-    bool insertOnlineUser(const char *szUser)
+    std::map<std::string, VNOCUser> onlineUsers;
+    bool insertOnlineUser(const VNOCUser &vuser)
     {
-        std::string temp = szUser;
-        return onlineUsers.insert(temp).second;
+        std::string temp = vuser.getNickName();
+        bool insertResult = false;
+        userSetMutex.lock();
+        if(onlineUsers.find(temp) == onlineUsers.end())
+        {
+            onlineUsers[temp] = vuser;
+            insertResult = true;
+        }
+        userSetMutex.unlock();
+        return insertResult;
     }
 };

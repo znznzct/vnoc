@@ -22,8 +22,9 @@ public:
 
 public:
     virtual void   setUniqueID(GUID_t guid);
-    virtual GUID_t getUniqueID();
-    virtual void   setNickName(std::string studentName);
+    virtual GUID_t getUniqueID() const;
+    virtual void   setNickName(const std::string &studentName);
+    virtual const std::string getNickName() const;
     
 public:
     virtual void heartbeat(int64 now);

@@ -15,6 +15,8 @@
 #include "../../NMessage/Message2Pack.h"
 #include "../../NMessage/Message2Parser.h"
 #include "../RoomManager.h"
+#include "../Room.h"
+#include "../VNOCUser.h"
 
 #include <ctime>
 
@@ -123,7 +125,7 @@ public:
         handler.setProtocol(protocol_);
         handler.start();
         MSG_RequestLogin rliMessage;
-        rliMessage.SetAccountNumber("testRLIwithAccountNumber");
+        rliMessage.SetAccountNumber("AccountNum");
         CBufferMessage buff;
         CMessage2Pack packer;
         packer.PackMessage(&rliMessage, buff);
@@ -148,7 +150,7 @@ public:
         handler->setProtocol(protocol_);
         handler->start();
         MSG_RequestLogin rliMessage;
-        char tempAccountNumber[] = "testUserSetDelete";
+        char tempAccountNumber[] = "UserSetDelete";
         rliMessage.SetAccountNumber(tempAccountNumber);
         CBufferMessage buff;
         CMessage2Pack packer;
@@ -177,8 +179,8 @@ public:
         handler.setProtocol(protocol_);
         handler.start();
         MSG_RequestLogin rliMessage;
-        rliMessage.SetPassword("testRLIwithAccountNumberAndPassword");
-        rliMessage.SetAccountNumber("testRLIwithAccountNumberAndPassword");
+        rliMessage.SetPassword("Username");
+        rliMessage.SetAccountNumber("Password");
         CBufferMessage buff;
         CMessage2Pack packer;
         packer.PackMessage(&rliMessage, buff);
@@ -203,7 +205,7 @@ public:
         handler.setProtocol(protocol_);
         handler.start();
         MSG_RequestLogin rliMessage;
-        rliMessage.SetAccountNumber("testRLIofLoginTwoTimes");
+        rliMessage.SetAccountNumber("hasLogined");
         CBufferMessage buff;
         CMessage2Pack packer;
         packer.PackMessage(&rliMessage, buff);
@@ -254,13 +256,23 @@ public:
 
     void testREC()
     {
-        RecMessageHandler recHandler(protocol_);
+        RliMessageHandler rlihandler(protocol_);
         VnocMessageSocketHandler<MockTcpConnection> handler(conn_);
         handler.setProtocol(protocol_);
         handler.start();
-        MSG_RequestEnterClassroom recMessage;
+        MSG_RequestLogin rliMessage;
+        rliMessage.SetAccountNumber("testREC");
         CBufferMessage buff;
         CMessage2Pack packer;
+        packer.PackMessage(&rliMessage, buff);
+        conn_->setRecv((char*)buff.GetBuffer(), buff.GetSize());
+
+        RecMessageHandler recHandler(protocol_);
+        handler.setProtocol(protocol_);
+        handler.start();
+        MSG_RequestEnterClassroom recMessage;
+        //CBufferMessage buff;
+        //CMessage2Pack packer;
         const int someRoomNo = 12345678;
         recMessage.SetRoomID(someRoomNo);              //this room number does not exist.
         packer.PackMessage(&recMessage, buff);
@@ -288,6 +300,8 @@ public:
         Rbuff.Copy(sendBuf, conn_->getSendLen());
         parser.Parser(&msg, Rbuff);
         msg.GetRetTag( retTag );
+        const VNOCUserMap &someMap = roomForTest.getUserMap();
+        CPPUNIT_ASSERT( someMap.begin()->second->getNickName() == "testREC" );
         CPPUNIT_ASSERT(msg.MsgId() == MSG_AnswerEnterClassroom_Id);
         CPPUNIT_ASSERT(retTag == 0);//room number is legal now, this request was accepted.
     }
