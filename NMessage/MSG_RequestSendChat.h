@@ -19,8 +19,6 @@ public:
     {
         RegisterPort("ChatMsg", MsgDataMType_Data, MsgDataType_String);
 
-        RegisterPort("ChatMsgLen", MsgDataMType_Data, MsgDataType_Uint8);
-
         RegisterPort("Nickname", MsgDataMType_Data, MsgDataType_String);
 
         InitializeMessage(MSG_RequestSendChat_Id);
@@ -29,8 +27,6 @@ public:
     MSG_RequestSendChat(const CMessage& Msg)
     {
         RegisterPort("ChatMsg", MsgDataMType_Data, MsgDataType_String);
-
-        RegisterPort("ChatMsgLen", MsgDataMType_Data, MsgDataType_Uint8);
 
         RegisterPort("Nickname", MsgDataMType_Data, MsgDataType_String);
 
@@ -44,11 +40,6 @@ public:
         return Write("ChatMsg", new StringData(Value));
     }
 
-    MsgStatus SetChatMsgLen(const Define::uint8& Value)
-    {
-        return Write("ChatMsgLen", new NumData<Define::uint8>(Value));
-    }
-
     MsgStatus SetNickname(const std::string& Value)
     {
         return Write("Nickname", new StringData(Value));
@@ -59,13 +50,6 @@ public:
         MsgDataValue* pReadValue = NULL;
         Read("ChatMsg", pReadValue);
         return pReadValue->ToStr(Value);
-    }
-
-    MsgStatus GetChatMsgLen(Define::uint8& Value) const
-    {
-        MsgDataValue* pReadValue = NULL;
-        Read("ChatMsgLen", pReadValue);
-        return pReadValue->ToUInt8(Value);
     }
 
     MsgStatus GetNickname(std::string& Value) const

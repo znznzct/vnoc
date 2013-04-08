@@ -100,7 +100,6 @@
 	<msg name="MSG_RequestSendChat" id="7101">
 		<item mtype="data" name="Nickname" type="string" />
 		<item mtype="data" name="ChatMsg" type="string" />
-		<item mtype="data" name="ChatMsgLen" type="uint8" />
 	</msg>
 	
 	<msg name="MSG_AnswerSendChat" id="7102">

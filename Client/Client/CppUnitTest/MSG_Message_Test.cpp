@@ -568,7 +568,6 @@ public:
 		uint8 nChatMsgLen = strChatMsg.length();
 		TMRsc.SetNickname(strNickname);
 		TMRsc.SetChatMsg(strChatMsg);
-		TMRsc.SetChatMsgLen(nChatMsgLen);
 
 		g_m2pack.PackMessage(&TMRsc, buf);
 		CMessage parserMsg(CMessage2Parser::GetMsgType(buf));
@@ -580,8 +579,6 @@ public:
 		CPPUNIT_ASSERT(strNickname == "路人甲");
 		TParserRsc.GetChatMsg(strChatMsg);
 		CPPUNIT_ASSERT(strChatMsg == "发个消息");
-		TParserRsc.GetChatMsgLen(nChatMsgLen);
-		CPPUNIT_ASSERT(nChatMsgLen == strChatMsg.length());
 	}
 
 	void MSG_AnswerSendChat_Test()
