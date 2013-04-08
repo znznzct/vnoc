@@ -23,6 +23,9 @@ typedef enum _VMsg
     MSG_AnswerClassInfo_Id                 = 6108,
     MSG_RequestEnterClassroom_Id           = 6109,
     MSG_AnswerEnterClassroom_Id            = 6110,
+    MSG_RequestSendChat_Id                 = 7101,
+    MSG_AnswerSendChat_Id                  = 7102,
+    MSG_DispatchChat_Id                    = 7103,
     MSG_TYPE_END,
 }VMsg;
 
