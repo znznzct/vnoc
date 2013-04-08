@@ -15,7 +15,7 @@
 #include "UserManage.hpp"
 #include "DBConnection.h"
 #include "DBCommand.h"
-#include "DBField.hpp"
+#include "DBFieldReader.hpp"
 #include <ezlogger_headers.hpp>
 
 using namespace std;
@@ -30,7 +30,7 @@ int main(int argc, char* argv[])
 	uint16 port = Config::getInstance()->getValue("port");
 
     //db test
-    /*DBConnection connection("F:\\VNOC\\NetService\\Database\\VNOC.db");
+    DBConnection connection("F:\\VNOC\\NetService\\Database\\VNOC.db");
     connection.open();
     if (connection.isAlive())
     {
@@ -43,11 +43,10 @@ int main(int argc, char* argv[])
     {
         while (cmd.fetchNext())
         {
-            cout << cmd["guid"].fieldIndex() << ", " << cmd["guid"].fieldName() << endl;
-            cout << cmd["nick_name"].fieldIndex() << ", " << cmd["nick_name"].fieldName() << endl;
-            cout << cmd["gender"].fieldIndex() << ", " << cmd["gender"].fieldName() << endl;
+            const DBFieldReader& guidField = cmd["nick_name"];
+            cout << guidField.fieldIndex() << ":" << guidField.fieldName().c_str() << " = " << guidField.asString() << endl;
         }
-    }*/
+    }
 
     NetService net;
     net.start(port);

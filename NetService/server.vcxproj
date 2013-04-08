@@ -193,8 +193,7 @@
     <ClInclude Include="src\DBCommand.h" />
     <ClInclude Include="src\DBConnection.h" />
     <ClInclude Include="src\DBDefine.h" />
-    <ClInclude Include="src\DBField.hpp" />
-    <ClInclude Include="src\DBRecordset.hpp" />
+    <ClInclude Include="src\DBFieldReader.hpp" />
     <ClInclude Include="src\FileUserStorage.h" />
     <ClInclude Include="src\GlobalDefinition.h" />
     <ClInclude Include="src\DKeyMap.h" />
