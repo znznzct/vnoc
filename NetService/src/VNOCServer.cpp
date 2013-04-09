@@ -30,23 +30,28 @@ int main(int argc, char* argv[])
 	uint16 port = Config::getInstance()->getValue("port");
 
     //db test
-    DBConnection connection("F:\\VNOC\\NetService\\Database\\VNOC.db");
+    DBString dbPath = _DB_TEXT("../Database/VNOC.db");
+    DBConnection connection(dbPath);
     connection.open();
     if (connection.isAlive())
     {
         cout << "Start DB OK." << endl;
-    }
 
-    DBCommand cmd(&connection, "SELECT guid, nick_name, gender FROM Users;");
-    bool result = cmd.query();
-    if (result == true)
-    {
-        while (cmd.fetchNext())
+        // execute
+        ToT.imbue(locale("chs"));
+        DBString commandText = _DB_TEXT("SELECT guid, nick_name, gender FROM Users;");
+        DBCommand cmd(&connection, commandText);
+        bool result = cmd.query();
+        if (result == true)
         {
-            const DBFieldReader& guidField = cmd["nick_name"];
-            cout << guidField.fieldIndex() << ":" << guidField.fieldName().c_str() << " = " << guidField.asString() << endl;
+            while (cmd.fetchNext())
+            {
+                const DBFieldReader& guidField = cmd[_DB_TEXT("nick_name")]; 
+                ToT << guidField.fieldIndex() << ":" << guidField.fieldName() << " = " << guidField.asString() << endl;
+            }
         }
     }
+
 
     NetService net;
     net.start(port);
