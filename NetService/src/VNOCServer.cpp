@@ -30,17 +30,18 @@ int main(int argc, char* argv[])
 	uint16 port = Config::getInstance()->getValue("port");
 
     //db test
-    DBString dbPath = _DB_TEXT("../Database/VNOC.db");
+    DBString dbPath = _DB_TEXT("Database/VNOC.db");
     DBConnection connection(dbPath);
     connection.open();
     if (connection.isAlive())
     {
         cout << "Start DB OK." << endl;
 
-        // execute
+        //localization
         ToT.imbue(locale("chs"));
-        DBString commandText = _DB_TEXT("SELECT guid, nick_name, gender FROM Users;");
-        DBCommand cmd(&connection, commandText);
+
+        // query
+        DBCommand cmd(&connection, _DB_TEXT("SELECT guid, nick_name, gender FROM Users;"));
         bool result = cmd.query();
         if (result == true)
         {
@@ -50,6 +51,12 @@ int main(int argc, char* argv[])
                 ToT << guidField.fieldIndex() << ":" << guidField.fieldName() << " = " << guidField.asString() << endl;
             }
         }
+
+        // execute nonquery command
+        cmd.setCommandText(_DB_TEXT("UPDATE Users SET nick_name = ? WHERE guid = ?;"));
+        cmd << _DB_TEXT("Ð¡Ãæ×Óex");
+        cmd << 10000;
+        cmd.execute();
     }
 
 
