@@ -41,7 +41,7 @@ int main(int argc, char* argv[])
         ToT.imbue(locale("chs"));
 
         // query
-        DBCommand cmd(&connection, _DB_TEXT("SELECT guid, nick_name, gender FROM Users;"));
+        DBCommand cmd(&connection, _DB_TEXT("SELECT guid, nick_name, is_gay FROM Users;"));
         bool result = cmd.query();
         if (result == true)
         {
@@ -52,9 +52,24 @@ int main(int argc, char* argv[])
             }
         }
 
+        //boolean type test
+        ToT << "GAY:" << endl;
+        cmd.setCommandText(_DB_TEXT("SELECT nick_name, is_gay FROM Users where is_gay = ?;"));
+        cmd << true;
+        result = cmd.query();
+        if (result == true)
+        {
+            while (cmd.fetchNext())
+            {
+                const DBFieldReader& guidField = cmd[_DB_TEXT("nick_name")]; 
+                ToT << guidField.fieldIndex() << ":" << guidField.fieldName() << " = " << guidField.asString() << endl;
+            }
+        }
+
         // execute nonquery command
-        cmd.setCommandText(_DB_TEXT("UPDATE Users SET nick_name = ? WHERE guid = ?;"));
+        cmd.setCommandText(_DB_TEXT("UPDATE Users SET nick_name = ?, bigint_test = ? WHERE guid = ?;"));
         cmd << _DB_TEXT("Ð¡Ãæ×Óex");
+        cmd << 4294967290000000000;
         cmd << 10000;
         cmd.execute();
     }
