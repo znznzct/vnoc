@@ -6,26 +6,77 @@
 // Description : Hello World in C++, Ansi-style
 //============================================================================
 
-
-
+#include "Common.h"
 #include <iostream>
 #include "NetService.h"
 #include "Config.hpp"
 #include <string>
 #include "SQLUserStorage.h"
 #include "UserManage.hpp"
+#include "DBConnection.h"
+#include "DBCommand.h"
+#include "DBFieldReader.hpp"
+#include <ezlogger_headers.hpp>
+
 using namespace std;
 using namespace VNOC::Message;
 
-int main()
+int main(int argc, char* argv[])
 {
     Config::getInstance()->Initialize("vnoc.conf");
     cout<<"port:"<<Config::getInstance()->getValue("port")<<endl;
-    sUserStorage us;
-    CUserManage::GetInstance()->initial(&us);
+    //sUserStorage us;
+    //CUserManage::GetInstance()->initial(&us);
+	uint16 port = Config::getInstance()->getValue("port");
+
+    //db test
+    DBString dbPath = _DB_TEXT("Database/VNOC.db");
+    DBConnection connection(dbPath);
+    connection.open();
+    if (connection.isAlive())
+    {
+        cout << "Start DB OK." << endl;
+
+        //localization
+        ToT.imbue(locale("chs"));
+
+        // query
+        DBCommand cmd(&connection, _DB_TEXT("SELECT guid, nick_name, is_gay FROM Users;"));
+        bool result = cmd.query();
+        if (result == true)
+        {
+            while (cmd.fetchNext())
+            {
+                const DBFieldReader& guidField = cmd[_DB_TEXT("nick_name")]; 
+                ToT << guidField.fieldIndex() << ":" << guidField.fieldName() << " = " << guidField.asString() << endl;
+            }
+        }
+
+        //boolean type test
+        ToT << "GAY:" << endl;
+        cmd.setCommandText(_DB_TEXT("SELECT nick_name, is_gay FROM Users where is_gay = ?;"));
+        cmd << true;
+        result = cmd.query();
+        if (result == true)
+        {
+            while (cmd.fetchNext())
+            {
+                const DBFieldReader& guidField = cmd[_DB_TEXT("nick_name")]; 
+                ToT << guidField.fieldIndex() << ":" << guidField.fieldName() << " = " << guidField.asString() << endl;
+            }
+        }
+
+        // execute nonquery command
+        cmd.setCommandText(_DB_TEXT("UPDATE Users SET nick_name = ?, bigint_test = ? WHERE guid = ?;"));
+        cmd << _DB_TEXT("Ð¡Ãæ×Óex");
+        cmd << 4294967290000000000;
+        cmd << 10000;
+        cmd.execute();
+    }
+
 
     NetService net;
-    net.start(Config::getInstance()->getValue("port"));
+    net.start(port);
 
     return 0;
 }

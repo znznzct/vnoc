@@ -10,6 +10,7 @@ typedef unsigned int GUID_t;
 #include <map>
 #include <algorithm>
 #include <hash_map>
+#include <unordered_map> //c++0x
 
 using namespace std;
 
@@ -53,6 +54,8 @@ typedef unsigned short     uint16;
 typedef unsigned int       uint32;
 typedef unsigned long long uint64;
 #endif
+
+#define INVALID_ID       (-1)
 
 //Lines
 #if defined(_WIN32)

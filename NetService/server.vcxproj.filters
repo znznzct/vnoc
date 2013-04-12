@@ -16,9 +16,6 @@
     <ClInclude Include="src\RoomPool.h">
       <Filter>modules\room</Filter>
     </ClInclude>
-    <ClInclude Include="src\RoomPool.cpp">
-      <Filter>modules\room</Filter>
-    </ClInclude>
     <ClInclude Include="src\RvcMessageHandler.hpp">
       <Filter>handlers</Filter>
     </ClInclude>
@@ -129,6 +126,27 @@
     </ClInclude>
     <ClInclude Include="src\RecMessageHandler.hpp">
       <Filter>handlers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\VNOCUserManager.h">
+      <Filter>modules\obj</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DBConnection.h">
+      <Filter>database\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DBCommand.h">
+      <Filter>database\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DBDefine.h">
+      <Filter>database\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SqliteDB.h">
+      <Filter>database\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DKeyMap.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DBFieldReader.hpp">
+      <Filter>database\Core</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -241,6 +259,18 @@
     <ClCompile Include="..\ThirdLibs\TinyXML\tinyxmlparser.cpp">
       <Filter>Tinyxml</Filter>
     </ClCompile>
+    <ClCompile Include="src\VNOCUserManager.cpp">
+      <Filter>modules\obj</Filter>
+    </ClCompile>
+    <ClCompile Include="src\RoomPool.cpp">
+      <Filter>modules\room</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DBConnection.cpp">
+      <Filter>database\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DBCommand.cpp">
+      <Filter>database\Core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="handlers">
@@ -278,6 +308,9 @@
     </Filter>
     <Filter Include="Tinyxml">
       <UniqueIdentifier>{612edc88-d65f-4513-a139-0d3150d54afe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="database\Core">
+      <UniqueIdentifier>{0b5192e2-6892-4661-b53c-79af0ecf7e7d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

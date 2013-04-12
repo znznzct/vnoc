@@ -99,7 +99,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>../ThirdLibs/VisualLeakDetector/lib/win32/vld.lib;$(ProjectDir)/lib/libmysql.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>../ThirdLibs/VisualLeakDetector/lib/win32/vld.lib;$(ProjectDir)/lib/libmysql.lib;$(ProjectDir)/lib/sqlite3.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PreBuildEvent>
       <Command>
@@ -141,6 +141,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>$(ProjectDir)/lib/sqlite3.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PreLinkEvent>
       <Command>ServerPreLink.bat RELEASE</Command>
@@ -189,20 +190,25 @@
     <ClInclude Include="src\AsioTcpServer.hpp" />
     <ClInclude Include="src\Common.h" />
     <ClInclude Include="src\Config.hpp" />
+    <ClInclude Include="src\DBCommand.h" />
+    <ClInclude Include="src\DBConnection.h" />
+    <ClInclude Include="src\DBDefine.h" />
+    <ClInclude Include="src\DBFieldReader.hpp" />
     <ClInclude Include="src\FileUserStorage.h" />
     <ClInclude Include="src\GlobalDefinition.h" />
+    <ClInclude Include="src\DKeyMap.h" />
     <ClInclude Include="src\mysql\MysqlWrapper.h" />
     <ClInclude Include="src\NetService.h" />
     <ClInclude Include="src\RclMessageHandler.hpp" />
     <ClInclude Include="src\RecMessageHandler.hpp" />
     <ClInclude Include="src\RliMessageHandler.hpp" />
-    <ClInclude Include="src\RoomPool.cpp" />
     <ClInclude Include="src\Room.h" />
     <ClInclude Include="src\RoomManager.h" />
     <ClInclude Include="src\RoomPool.h" />
     <ClInclude Include="src\RvcMessageHandler.hpp" />
     <ClInclude Include="src\SocketServer.hpp" />
     <ClInclude Include=".\src\UserManage.hpp" />
+    <ClInclude Include="src\SqliteDB.h" />
     <ClInclude Include="src\SQLUserStorage.h" />
     <ClInclude Include="src\UserInfo.hpp" />
     <ClInclude Include=".\src\UserStorage.h" />
@@ -210,6 +216,7 @@
     <ClInclude Include="src\VnocMessageSocketHandler.hpp" />
     <ClInclude Include="src\VnocProtocol.hpp" />
     <ClInclude Include="src\VNOCUser.h" />
+    <ClInclude Include="src\VNOCUserManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\NMessage\BufferMessage.cpp" />
@@ -238,17 +245,21 @@
     <ClCompile Include="..\ThirdLibs\TinyXML\tinyxmlparser.cpp" />
     <ClCompile Include="src\AsioTcpServer.cpp" />
     <ClCompile Include="src\Config.cpp" />
+    <ClCompile Include="src\DBCommand.cpp" />
+    <ClCompile Include="src\DBConnection.cpp" />
     <ClCompile Include="src\FileUserStorage.cpp" />
     <ClCompile Include="src\mysql\MysqlWrapper.cpp" />
     <ClCompile Include="src\NetService.cpp" />
     <ClCompile Include="src\Room.cpp" />
     <ClCompile Include="src\RoomManager.cpp" />
+    <ClCompile Include="src\RoomPool.cpp" />
     <ClCompile Include="src\SQLUserStorage.cpp" />
     <ClCompile Include="src\UserManage.cpp" />
     <ClCompile Include="src\UserStorage.cpp" />
     <ClCompile Include="src\VnocProtocol.cpp" />
     <ClCompile Include="src\VNOCServer.cpp" />
     <ClCompile Include="src\VNOCUser.cpp" />
+    <ClCompile Include="src\VNOCUserManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="src\VnocMessageSocketHandler.inl" />
