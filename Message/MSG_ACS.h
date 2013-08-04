@@ -1,8 +1,8 @@
-#ifndef VNOC_MSG_ACS
-#define VNOC_MSG_ACS
+#ifndef __VNOC_MSG_ACS_H__
+#define __VNOC_MSG_ACS_H__
 
 #include "BaseMessage.h"
-//ACS(班级信息同步通知确认)
+//ACS(锟洁级锟斤拷息同锟斤拷知通确锟斤拷)
 
 class MSG_ACS:public CMessage
 {
@@ -20,7 +20,7 @@ public:
 	virtual ~MSG_ACS(){}
 
 public:
-	//班级信息同步通知
+	//锟洁级锟斤拷息同锟斤拷知通
 	const byte* GetMessageSynchro() const
 		GetParam_t_r("MessageSynchro");
 
